@@ -1,7 +1,8 @@
 var MegaDropDown = (function ($) {
 	var pub = {};
 	var selectElement;
-	var megaddSelectBox;
+	var mddSelectBox;
+	var mddListView;
 	var items = [];
 
 	//
@@ -19,18 +20,7 @@ var MegaDropDown = (function ($) {
 	}
 
 	function selectBoxClickHandler(e) {
-		var listview = buildListView();
-		megaddSelectBox.after(listview);
-	}
-
-	function listViewItemClickHandler(e) {
-		console.log("Clicked element value: " + $(this).data('value'));
-		// 6.1 Set the correct values on the original select
-		//var selectElement = $(this).closest('select');
-		//selectElement.val($(this).data('value'));
-		// 6.2 Update MegaDropDown control to show the selected value
-		//var megaDropDownSelect = $(this).closest('.megaadd-select');
-		//megaDropDownSelect.html($(this).html());
+		mddListView.toggle();
 	}
 
 	//
@@ -41,7 +31,6 @@ var MegaDropDown = (function ($) {
 		var control = $('<div>');
 		control.addClass('megadd-list');
 
-
 		for (var i = 0; i < items.length; i++) {
 			var item = $('<p>');
 			item.html(items[i].text);
@@ -51,6 +40,16 @@ var MegaDropDown = (function ($) {
 		}
 
 		return control;
+	}
+
+	function listViewItemClickHandler(e) {
+		console.log("Clicked element value: " + $(this).data('value'));
+		// 6.1 Set the correct values on the original select
+		//var selectElement = $(this).closest('select');
+		//selectElement.val($(this).data('value'));
+		// 6.2 Update MegaDropDown control to show the selected value
+		//var megaDropDownSelect = $(this).closest('.megaadd-select');
+		//megaDropDownSelect.html($(this).html());
 	}
 
 	//
@@ -75,8 +74,11 @@ var MegaDropDown = (function ($) {
 	//
 
 	pub.show = function () {
-		megaddSelectBox = buildSelectBox();
-		selectElement.after(megaddSelectBox);
+		mddSelectBox = buildSelectBox();
+		selectElement.after(mddSelectBox);
+		mddListView = buildListView();
+		mddListView.hide();
+		mddSelectBox.after(mddListView);
 	};
 
 	pub.init = function (element) {
