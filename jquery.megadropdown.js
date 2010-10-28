@@ -40,7 +40,7 @@ var MegaDropDown = (function ($) {
 	function buildListView() {
 		var control = $('<div>');
 		control.addClass('megadd-list');
-		
+
 
 		for (var i = 0; i < items.length; i++) {
 			var item = $('<p>');
