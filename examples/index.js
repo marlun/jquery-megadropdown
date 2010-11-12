@@ -1,4 +1,4 @@
 $(document).ready(function()
 {
-	$("select").megaDropDown({'name' : 'Martin Lundberg'});
+	$("select").megaDropDown({'columns': 3});
 });
