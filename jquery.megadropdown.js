@@ -103,7 +103,7 @@ jQuery.extend(MegaDropDown.prototype, {
 				item.html(this.items[index].text);
 				item.data('value', this.items[index].key);
 				item.addClass('mdd-item');
-				//item.bind('click.megaDropDown', jQuery.proxy(listViewItemClickHandler, this));
+				item.bind('click.megaDropDown', jQuery.proxy(this.listViewItemClickHandler, this));
 				list.append(item);
 				index += 1;
 			}
@@ -116,13 +116,14 @@ jQuery.extend(MegaDropDown.prototype, {
 	},
 
 	listViewItemClickHandler: function (e) {
-		console.log("Clicked element value: " + $(this).data('value'));
+		var item = $(e.target);
+		//console.log("Clicked element value: " + item.data('value'));
 
 		// Set the correct values on the original select
-		this.oldSelect.val($(this).data('value'));
+		this.oldSelect.val(item.data('value'));
 
 		// Update MegaDropDown control to show the selected value
-		this.setSelectBoxText($(this).html());
+		this.setSelectBoxText(item.html());
 		this.setSelectBoxArrow('down');
 
 		this.listView.toggle();
