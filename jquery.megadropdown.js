@@ -127,6 +127,9 @@ jQuery.extend(MegaDropDown.prototype, {
 		// Set the correct values on the original select
 		this.oldSelect.val(item.data('value'));
 
+		this.listView.find('.mdd-item-selected').removeClass('mdd-item-selected');
+		item.addClass('mdd-item-selected');
+
 		// Update MegaDropDown control to show the selected value
 		this.setSelectBoxText(item.html());
 		this.setSelectBoxArrow('down');
