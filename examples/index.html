@@ -13,15 +13,18 @@
 			background: -moz-linear-gradient(100% 100% 90deg, #dedede, #f3f3f3);
 			background:     -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f3f3f3), to(#dedede));
 			background:             gradient(100% 100% 90deg, #dedede, #f3f3f3); }
-		.mdd-open {
+		.mdd-selectbox-open {
 			background: -moz-linear-gradient(100% 100% 90deg, #f3f3f3, #dedede);
 			background:			-webkit-gradient(linear, 0% 0%, 0% 100%, from(#dedede), to(#f3f3f3));
 			background:			 linear-gradient(100% 100% 90deg, #f3f3f3, #dedede); }
 		.mdd-selectbox-arrow { float: right; }
-		.mdd-listview { background: #eee; border: 1px solid #ddd; width: 600px; font-family: helvetica,verdana,sans-serif; overflow: auto; }
+		.mdd-listview { background: #eee; border: 1px solid #ddd; width: 600px; padding: 0.25em;
+			font-family: helvetica,verdana,sans-serif; overflow: auto; }
 		.mdd-listview p { margin: 0; padding: 0; }
-		.mdd-listview ul { list-style: none; padding: 0; }
-		.mdd-item { cursor: pointer; }
+		.mdd-listview ul { list-style: none; padding: 0; margin: 0; }
+		.mdd-item { cursor: pointer; padding: 0.25em 0.25em;}
+		.mdd-item:hover { background-color: #e1e6eb; }
+		.mdd-item-selected { font-weight: bold; }
 	</style>
 </head>
 <body>
