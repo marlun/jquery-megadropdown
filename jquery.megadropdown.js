@@ -15,7 +15,7 @@ jQuery.extend(MegaDropDown.prototype, {
 		this.listView.hide();
 		this.selectBox.after(this.listView);
 
-		$('body').bind('click.megaDropDown', jQuery.proxy(function (e) {
+		$(document).bind('click.megaDropDown', jQuery.proxy(function (e) {
 			if (this.selectBox.hasClass('mdd-selectbox-open')) {
 				this.selectBox.click();
 			}
