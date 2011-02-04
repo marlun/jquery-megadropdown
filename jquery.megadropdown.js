@@ -105,6 +105,9 @@ jQuery.extend(MegaDropDown.prototype, {
 				item.html(this.items[index].text);
 				item.data('value', this.items[index].key);
 				item.addClass('mdd-item');
+				if (item.data('value') == this.oldSelect.val()) {
+					item.addClass('mdd-item-selected');
+				}
 				item.bind('click.megaDropDown', jQuery.proxy(this.listViewItemClickHandler, this));
 				list.append(item);
 				index += 1;
