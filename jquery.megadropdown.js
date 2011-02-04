@@ -57,11 +57,11 @@ jQuery.extend(MegaDropDown.prototype, {
 		this.listView.toggle();
 		if (this.listView.is(':visible')) {
 			this.setSelectBoxArrow('up');
-			this.selectBox.addClass('mdd-open');
+			this.selectBox.addClass('mdd-selectbox-open');
 		}
 		else {
 			this.setSelectBoxArrow('down');
-			this.selectBox.removeClass('mdd-open');
+			this.selectBox.removeClass('mdd-selectbox-open');
 		}
 	},
 
