@@ -60,14 +60,13 @@ jQuery.extend(MegaDropDown.prototype, {
 	},
 
 	selectBoxClickHandler: function (e) {
-		this.listView.toggle();
-		if (this.listView.is(':visible')) {
-			this.setSelectBoxArrow('up');
-			this.selectBox.addClass('mdd-selectbox-open');
+		if (this.isOpen())
+		{
+			this.close();
 		}
-		else {
-			this.setSelectBoxArrow('down');
-			this.selectBox.removeClass('mdd-selectbox-open');
+		else
+		{
+			this.open();
 		}
 
 		e.stopPropagation();
@@ -84,6 +83,22 @@ jQuery.extend(MegaDropDown.prototype, {
 		else {
 			this.selectBox.find('span:last').html('&#9650;');
 		}
+	},
+	
+	open: function () {
+		this.selectBox.addClass('mdd-selectbox-open');
+		this.setSelectBoxArrow('up');
+		this.listView.show();
+	},
+	
+	close: function () {
+		this.selectBox.removeClass('mdd-selectbox-open');
+		this.setSelectBoxArrow('down');
+		this.listView.hide();
+	},
+	
+	isOpen: function () {
+		return this.selectBox.hasClass('mdd-selectbox-open');
 	},
 
 	//
@@ -138,9 +153,8 @@ jQuery.extend(MegaDropDown.prototype, {
 
 		// Update MegaDropDown control to show the selected value
 		this.setSelectBoxText(item.html());
-		this.setSelectBoxArrow('down');
-
-		this.listView.toggle();
+		
+		this.close();
 
 		e.stopPropagation();
 	}
