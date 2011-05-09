@@ -46,9 +46,11 @@ jQuery.extend(MegaDropDown.prototype, {
 		var selected = this.getOriginalSelected();
 		var control = $('<div>');
 		control.addClass('mdd-selectbox');
+		control.attr('style', 'width: ' + this.settings.selectWidth + ';');
 		control.bind('click.megaDropDown', jQuery.proxy(this.selectBoxClickHandler, this));
 
 		var text = $('<span>');
+		text.addClass('mdd-selectbox-text');
 		text.html(selected.text);
 		control.append(text);
 
@@ -108,6 +110,7 @@ jQuery.extend(MegaDropDown.prototype, {
 	buildListView: function () {
 		var control = $('<div>');
 		control.addClass('mdd-listview');
+		control.attr('style', 'width: ' + this.settings.listWidth + ';');
 
 		control = this.buildColumnListView(control);
 		return control;
@@ -166,7 +169,8 @@ jQuery.extend(MegaDropDown.prototype, {
 
 		var settings = {
 			'columns' : 2,
-			'width': 640
+			'listWidth': 600,
+			'selectWidth': 200
 		};
 
 		return this.each(function() {
