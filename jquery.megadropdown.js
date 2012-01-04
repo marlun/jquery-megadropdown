@@ -16,15 +16,15 @@ jQuery.extend(MegaDropDown.prototype, {
 		this.selectBox.after(this.listView);
 
 		$(document).bind('click.megaDropDown', jQuery.proxy(function (e) {
-			if (this.selectBox.hasClass('mdd-selectbox-open')) {
-				this.selectBox.click();
+			if (this.isOpen()) {
+				this.close();
 			}
 		}, this));
 	},
 
 	getOriginalItems: function () {
-		var list = [];
-		var elements = this.oldSelect.find('option');
+		var list = [],
+				elements = this.oldSelect.find('option');
 
 		elements.each(function (idx, element) {
 			list.push({'text' : $(element).html(), 'key' : $(element).val()});
@@ -43,16 +43,17 @@ jQuery.extend(MegaDropDown.prototype, {
 	//
 
 	buildSelectBox: function () {
-		var selected = this.getOriginalSelected();
-		var control = $('<div>');
+		var selected = this.getOriginalSelected(),
+				control = $('<div>'),
+				text = $('<span>'),
+				arrow = $('<span>&#9660;</span>');
+		
 		control.addClass('mdd-selectbox');
 		control.bind('click.megaDropDown', jQuery.proxy(this.selectBoxClickHandler, this));
 
-		var text = $('<span>');
 		text.html(selected.text);
 		control.append(text);
 
-		var arrow = $('<span>&#9660;</span>');
 		arrow.addClass('mdd-selectbox-arrow');
 		control.append(arrow);
 
@@ -107,24 +108,29 @@ jQuery.extend(MegaDropDown.prototype, {
 
 	buildListView: function () {
 		var control = $('<div>');
-		control.addClass('mdd-listview');
 
+		control.addClass('mdd-listview');
 		control = this.buildColumnListView(control);
+
 		return control;
 	},
 
 	buildColumnListView: function(control) {
-		var index = 0;
-		var itemsPerColumn = Math.ceil(this.items.length / this.settings.columns);
+		var index = 0,
+				itemsPerColumn = Math.ceil(this.items.length / this.settings.columns),
+				listWidth = 100 / this.settings.columns,
+				list,
+				item;
+				
+				
 		for (var col = 0; col < this.settings.columns; col++) {
-			var listWidth = 100 / this.settings.columns;
-			var list = $('<ul>');
+			list = $('<ul>');
 			list.css({'width' : listWidth + "%", 'float' : 'left'});
 			for (var i = index; i < itemsPerColumn * (col + 1); i++) {
 				if (index >= this.items.length) {
 					break;
 				}
-				var item = $('<li>');
+				item = $('<li>');
 				item.html(this.items[index].text);
 				item.data('value', this.items[index].key);
 				item.addClass('mdd-item');
@@ -170,7 +176,6 @@ jQuery.extend(MegaDropDown.prototype, {
 		};
 
 		return this.each(function() {
-
 			if (options) {
 				$.extend(settings, options);
 			}
